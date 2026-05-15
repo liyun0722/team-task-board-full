@@ -18,6 +18,13 @@ export function filterTasks(tasks: Task[], mode: FilterMode): Task[] {
 }
 
 export function searchTasks(tasks: Task[], query: string): Task[] {
-  if (!query) return tasks;
-  return tasks.filter((t) => t.title.includes(query));
+  if (!query.trim()) return tasks;
+  
+  const searchTerms = query.toLowerCase().split(/\s+/);
+  
+  return tasks.filter((task) => {
+    const titleLower = task.title.toLowerCase();
+    return searchTerms.some(term => titleLower.includes(term));
+  });
 }
+

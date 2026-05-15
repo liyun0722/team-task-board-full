@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import type { Task, TaskPriority } from "../types/task";
 import { validateTaskInput } from "../logic/taskValidation";
 
@@ -19,7 +19,11 @@ export function TaskItem({ task, onEdit, onDelete }: Props) {
   const [editError, setEditError] = useState<string | null>(null);
 
   function handleToggle() {
-    setCompleted((prev) => !prev);
+  // setCompleted((prev) => !prev);
+  const newCompleted = !completed;
+  console.log("Toggling:", task.id, "to", newCompleted);  // ← ADD THIS
+  setCompleted(newCompleted);
+  onEdit(task.id, { completed: newCompleted });
   }
 
   async function handleSaveEdit() {

@@ -1,4 +1,4 @@
-import type { Task, TaskInput } from "../types/task";
+﻿import type { Task, TaskInput } from "../types/task";
 
 const STORAGE_KEY = "team-task-board:tasks";
 const ARTIFICIAL_DELAY_MS = 200;
@@ -84,13 +84,14 @@ export async function updateTask(
   writeToStorage(tasks);
   return delay(updated);
 }
-
-export async function deleteTask(id: string): Promise<Task[]> {
+  export async function deleteTask(id: string): Promise<Task[]> {
   if (SIMULATE_FAILURE) {
     await delay(null);
     throw new Error("Simulated save failure.");
   }
   const tasks = readFromStorage();
   const remaining = tasks.filter((t) => t.id !== id);
+  writeToStorage(remaining);  //  LINE ADDED
   return delay(remaining);
+
 }
