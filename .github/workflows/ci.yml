@@ -11,19 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # This is the latest version as of now
       - uses: actions/checkout@v4
 
+      # This is the latest version as of now
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
       - run: npm ci
-
       - run: npm run test
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Playwright tests
-        run: npx playwright test
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
