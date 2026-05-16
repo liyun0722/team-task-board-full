@@ -22,11 +22,5 @@ jobs:
 
       - run: npm run test
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-
-      - name: Start dev server and run E2E tests
-        run: |
-          npm run dev &
-          npx wait-on http://localhost:5173
-          npx playwright test
+      - name: Run Playwright tests
+        run: npx playwright test
